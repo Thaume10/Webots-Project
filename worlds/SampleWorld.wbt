@@ -1,0 +1,145 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "../protos/LavigneTom.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.5773502691896258 0.5773502691896258 0.5773502691896258 2.0944
+  position 1.8888016419367648 7.361762884697693 21.70772850292643
+  follow "robotTomProto"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Pose {
+  translation 4 4 0
+  children [
+    RectangleArena {
+      floorSize 8 8
+      floorTileSize 8 8
+      floorAppearance Appearance {
+        texture ImageTexture {
+          url [
+            "https://lh3.googleusercontent.com/HyVngxLFtwF_kHNV6aGdCBu4d0vWtFzgS4Y-A-R2J6U3Pe98h3CjtaLT3UVWZ3qvIyPMG7OF-sxWv6_TNmyYHaQ=w1280"
+          ]
+          repeatS FALSE
+          repeatT FALSE
+          filtering 1
+        }
+      }
+      wallHeight 1
+    }
+    Solid {
+      translation -0.5 0 0.5
+      children [
+        Solid {
+          children [
+            DEF default_shelf Shape {
+              appearance PBRAppearance {
+                baseColor 0.509804 0.282353 0.054902
+                metalness 0.5
+              }
+              geometry Box {
+                size 0.2 5 1
+              }
+            }
+          ]
+          name "shelf1"
+          boundingObject USE default_shelf
+          physics Physics {
+          }
+        }
+        Solid {
+          translation 1.5 0 0
+          children [
+            DEF default_shelf Shape {
+              appearance PBRAppearance {
+                baseColor 0.509804 0.282353 0.054902
+                metalness 0.5
+              }
+              geometry Box {
+                size 0.2 5 1
+              }
+            }
+          ]
+          name "shelf2"
+          boundingObject USE default_shelf
+          physics Physics {
+          }
+        }
+        Solid {
+          translation 3 0 0
+          children [
+            DEF default_shelf Shape {
+              appearance PBRAppearance {
+                baseColor 0.509804 0.282353 0.054902
+                metalness 0.5
+              }
+              geometry Box {
+                size 0.2 5 1
+              }
+            }
+          ]
+          name "shelf3"
+          boundingObject USE default_shelf
+          physics Physics {
+          }
+        }
+      ]
+      name "Shelves"
+    }
+    Solid {
+      translation 0 0 0.5
+      children [
+        Solid {
+          translation -2.75 3.5 0
+          children [
+            DEF loading_area_divider Shape {
+              appearance PBRAppearance {
+                baseColor 0.25098 0.25098 0.25098
+                metalness 0
+              }
+              geometry Box {
+                size 0.2 1 1
+              }
+            }
+          ]
+          name "divider1"
+          boundingObject USE loading_area_divider
+          physics Physics {
+          }
+        }
+        Solid {
+          translation -1.5 3.5 0
+          children [
+            DEF loading_area_divider Shape {
+              appearance PBRAppearance {
+                baseColor 0.25098 0.25098 0.25098
+                metalness 0
+              }
+              geometry Box {
+                size 0.2 1 1
+              }
+            }
+          ]
+          name "divider2"
+          boundingObject USE loading_area_divider
+          physics Physics {
+          }
+        }
+      ]
+      name "LoadingAreaDividers"
+    }
+  ]
+}
+LavigneTom {
+  hidden rotation_5 1 1.1733773494009638e-10 -1.173395808818272e-10 1.5707999999999962
+  hidden rotation_6 1 -1.578540927977634e-10 1.5785387594300634e-10 1.5707999999999958
+  translation 1.89404 7.38549 0.2
+  controllerr "mapping"
+}

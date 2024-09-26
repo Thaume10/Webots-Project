@@ -1,0 +1,387 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/factory/containers/protos/WoodenBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Parquetry.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.00459623319656623 0.012425566491108313 0.9999122361176395 5.57392728992913
+  position -5.541992119315202 3.6459687553479045 0.9806940525124623
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 9 9
+  floorTileSize 2 2
+  floorAppearance Parquetry {
+  }
+  wallHeight 0.3
+}
+WoodenBox {
+  translation -0.462962 3.54367 0.63
+  mass 2
+}
+Robot {
+  translation 0.00786525 0.0855336 0.25
+  rotation 0 0 1 3.14159
+  children [
+    DEF BODY Shape {
+      appearance PBRAppearance {
+        baseColor 0 0.666667 1
+      }
+      geometry Cylinder {
+        height 0.205
+        radius 0.4
+      }
+    }
+    DEF bor1 Solid {
+      translation 0.38 0 0.15
+      children [
+        DEF bor Shape {
+          appearance PBRAppearance {
+            baseColor 0.458824 0.231373 0
+            roughness 1
+            metalness 0
+          }
+          geometry Box {
+            size 0.02 0.1 0.1
+          }
+        }
+      ]
+      name "solid(4)"
+      boundingObject USE bor
+      physics Physics {
+      }
+    }
+    DEF bor2 Solid {
+      translation -0.38 0 0.15
+      children [
+        USE bor
+      ]
+      name "solid(5)"
+      boundingObject USE bor
+      physics Physics {
+      }
+    }
+    DEF bor3 Solid {
+      translation 0 -0.38 0.15
+      rotation 0 0 1 1.5708
+      children [
+        USE bor
+      ]
+      name "solid(6)"
+      boundingObject USE bor
+      physics Physics {
+      }
+    }
+    DEF bor4 Solid {
+      translation 0 0.38 0.15
+      rotation 0 0 1 1.5708
+      children [
+        USE bor
+      ]
+      name "solid(7)"
+      boundingObject USE bor
+      physics Physics {
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.3 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheel1"
+        }
+      ]
+      endPoint DEF wheel1 Solid {
+        translation 0 0.3 -0.05
+        rotation 1 2.0866725965929234e-11 -2.086821755102553e-11 1.570799999999998
+        children [
+          DEF wheel_shape Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 0.498039
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.1
+              radius 0.15
+            }
+          }
+        ]
+        boundingObject USE wheel_shape
+        physics DEF wheelph Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 -0.3 -0.05
+      }
+      device [
+        RotationalMotor {
+          name "wheel2"
+        }
+      ]
+      endPoint DEF wheel2 Solid {
+        translation 0 -0.3 -0.05
+        rotation 1 2.0867039983844237e-11 -2.086791334617036e-11 1.570799999999999
+        children [
+          USE wheel_shape
+        ]
+        name "solid(1)"
+        boundingObject USE wheel_shape
+        physics USE wheelph
+      }
+    }
+    BallJoint {
+      jointParameters DEF joint1 BallJointParameters {
+        anchor 0.3 0 -0.1
+      }
+      endPoint DEF ballwheel1 Solid {
+        translation 0.3 0 -0.1
+        children [
+          DEF sphere Shape {
+            appearance PBRAppearance {
+              roughness 1
+              metalness 0
+            }
+            geometry Sphere {
+              radius 0.1
+            }
+          }
+        ]
+        name "solid(2)"
+        boundingObject USE sphere
+        physics Physics {
+        }
+      }
+    }
+    BallJoint {
+      jointParameters DEF joint2 BallJointParameters {
+        anchor -0.3 0 -0.1
+      }
+      endPoint DEF ballwheel2 Solid {
+        translation -0.3 0 -0.1
+        children [
+          USE sphere
+        ]
+        name "solid(3)"
+        boundingObject USE sphere
+        physics Physics {
+        }
+      }
+    }
+    GPS {
+      translation 0 0.2 0
+      name "gps1"
+    }
+    GPS {
+      translation 0 -0.2 0
+      name "gps2"
+    }
+    Lidar {
+      translation 0.45 0 0
+      children [
+        Solid {
+          translation -0.055 0 0
+          children [
+            DEF lidar Shape {
+              appearance PBRAppearance {
+                baseColor 1 0 0
+                roughness 1
+                metalness 0
+              }
+              geometry Box {
+                size 0.08 0.05 0.05
+              }
+            }
+          ]
+          boundingObject USE lidar
+        }
+      ]
+      name "lidar1"
+      horizontalResolution 103
+      fieldOfView 3.926
+      numberOfLayers 1
+      maxRange 5
+    }
+    Lidar {
+      translation -0.45 0 0
+      rotation 0 1 0 3.14
+      children [
+        Solid {
+          translation -0.055 0 0
+          children [
+            USE lidar
+          ]
+          boundingObject USE lidar
+        }
+      ]
+      name "lidar2"
+      horizontalResolution 103
+      fieldOfView 3.926
+      numberOfLayers 1
+      maxRange 5
+    }
+    Display {
+      name "map"
+      width 200
+      height 200
+    }
+    DistanceSensor {
+      translation 0 -0.4 0
+      rotation 0 0 1 -1.57
+      children [
+        DEF dsensor Shape {
+          appearance PBRAppearance {
+            baseColor 0.505882 0.505882 0.505882
+          }
+          geometry Box {
+            size 0.02 0.05 0.05
+          }
+        }
+      ]
+      name "d2"
+      lookupTable [
+        0 0 0
+        0.3 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0 0.4 0
+      rotation 0 0 1 1.57
+      children [
+        USE dsensor
+      ]
+      name "d5"
+      lookupTable [
+        0 0 0
+        0.3 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.2828 0.2828 0
+      rotation 0 0 1 0.7853
+      children [
+        USE dsensor
+      ]
+      name "d6"
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.1368 0.3758 0
+      rotation 0 0 1 1.2217
+      children [
+        USE dsensor
+      ]
+      name "d8"
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.137 -0.375 0
+      rotation 0 0 1 -1.22
+      children [
+        USE dsensor
+      ]
+      name "d9"
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.2828 -0.2828 0
+      rotation 0 0 1 -0.7853
+      children [
+        USE dsensor
+      ]
+      name "d1"
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.3804 0.1236 0
+      rotation 0 0 1 0.31415
+      children [
+        USE dsensor
+      ]
+      name "d7"
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.3804 -0.1236 0
+      rotation 0 0 1 -0.3141
+      children [
+        USE dsensor
+      ]
+      name "d0"
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation 0.4 0 0
+      children [
+        USE dsensor
+      ]
+      name "d10"
+      lookupTable [
+        0 0 0
+        0.28 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.2828 0.2828 0
+      rotation 0 0 1 2.3561
+      children [
+        USE dsensor
+      ]
+      name "d4"
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+    DistanceSensor {
+      translation -0.2828 -0.2828 0
+      rotation 0 0 1 -2.3561
+      children [
+        USE dsensor
+      ]
+      name "d3"
+      lookupTable [
+        0 0 0
+        0.2 1000 0
+      ]
+    }
+  ]
+  name "robotTom0.4"
+  boundingObject USE BODY
+  physics Physics {
+    density -1
+    mass 1
+  }
+  controller "navigation"
+}
